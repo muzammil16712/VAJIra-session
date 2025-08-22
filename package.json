@@ -1,30 +1,20 @@
-```javascript
-const { Client, LocalAuth } = require("whatsapp-web.js");
-const qrcode = require("qrcode-terminal");
-
-// Initialize WhatsApp Client
-const client = new Client({
-    authStrategy: new LocalAuth(), // Keeps session logged in
-    webVersionCache: {
-        type: "remote",
-        remotePath: "https://web.whatsapp.com",
-    },
-    puppeteer: {
-        headless: false, // Opens browser for login
-        executablePath: "/Applications/Safari.app/Contents/MacOS/Safari", // Safari browser path
-        args: ["--no-sandbox", "--disable-setuid-sandbox"]
-    }
-});
-
-// Pair Code Login
-client.on("pairing_code", (pairingCode) => {
-    console.log("🔗 Your WhatsApp Pair Code:", pairingCode);
-});
-
-client.on("ready", () => {
-    console.log("✅ Bot is ready!");
-});
-
-// Export client for use in bot.js
-module.exports = client;
-```
+{
+  "name": "whatsapp-session-bot",
+  "version": "1.0.0",
+  "description": "WhatsApp bot with session ID generator and Express server",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "engines": {
+    "node": "18.x"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "body-parser": "^1.20.2",
+    "whatsapp-web.js": "^1.23.0",
+    "qrcode-terminal": "^0.12.0",
+    "puppeteer-core": "^21.0.0",
+    "chrome-aws-lambda": "^10.1.0"
+  }
+}
